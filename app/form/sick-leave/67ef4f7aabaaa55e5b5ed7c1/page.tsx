@@ -112,8 +112,11 @@ export default function Page() {
 }
 
 function Certificate() {
+  const [currentUrl, setCurrentUrl] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
       window.print();
     }
   }, []);
@@ -242,7 +245,7 @@ function Certificate() {
         {/* FOOTER */}
         <div className="mt-6 flex items-center gap-5">
           <QRCodeCanvas
-            value="https://ssv.uz/document/11CUV000771125"
+            value={currentUrl || "https://ssv.uz/document/11CUV000771125"}
             size={90}
             fgColor="#000"
             bgColor="#fff"
