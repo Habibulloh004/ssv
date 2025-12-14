@@ -112,18 +112,17 @@ export default function Page() {
 }
 
 function Certificate() {
-  const [currentUrl, setCurrentUrl] = useState("");
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(window.location.href);
+    if (typeof window === "undefined") return;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (!isMobile) {
       window.print();
     }
   }, []);
 
   return (
-    <main className="bg-white py-8">
-      <section className="mx-auto w-[794px] px-10 py-8 text-black">
+    <main className="bg-white px-4 py-6 sm:px-0 sm:py-8">
+      <section className="mx-auto w-full max-w-[794px] px-4 py-6 text-black sm:px-10 sm:py-8">
         {/* Date */}
         <div className="text-right text-[12px] leading-[1.25]">
           11.11.2025, 11:23
@@ -245,7 +244,9 @@ function Certificate() {
         {/* FOOTER */}
         <div className="mt-6 flex items-center gap-5">
           <QRCodeCanvas
-            value={currentUrl || "https://ssv.uz/document/11CUV000771125"}
+            value={
+              "https://ssv-hazel.vercel.app/form/sick-leave/67ef4f7aabaaa55e5b5ed7c1"
+            }
             size={90}
             fgColor="#000"
             bgColor="#fff"
